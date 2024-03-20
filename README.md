@@ -64,8 +64,56 @@ Now, if there are multiple PDF documents, we can iterate over them and call the 
 
 *Reasoning: The PyPDF2 library is a popular choice for extracting text from PDF documents in Python. It provides an easy-to-use interface to extract text page by page. By iterating over the pages, we can extract the textual content and concatenate it to form a complete text representation of the document.*
 
+**Apply text preprocessing techniques such as tokenization, stop word removal, stemming, and lemmatization to clean the extracted text data.**
 
+To apply text preprocessing techniques such as tokenization, stop word removal, stemming, and lemmatization to clean the extracted text data, follow these steps:
 
+- Tokenization: Tokenization is the process of splitting the text into individual tokens or words. Can use the nltk library in Python to perform tokenization.
+```python
+import nltk
+
+text = "This is an example sentence."
+
+tokens = nltk.word_tokenize(text)
+
+print(tokens)
+```
+
+- Stop Word Removal: Stop words are common words that do not carry much meaning and can be removed from the text. Can use the nltk library's stopwords corpus to remove stop words.
+```python
+from nltk.corpus import stopwords
+
+stop_words = set(stopwords.words('english'))
+
+filtered_tokens = [token for token in tokens if token.lower() not in stop_words]
+
+print(filtered_tokens)
+```
+
+- Stemming or Lemmatization: Stemming and lemmatization both aim to reduce words to their base or root form. Stemming is a simpler process that chops off the ends of words, while lemmatization uses language and context to determine the base form. Can choose either stemming or lemmatization based on requirements.
+*(Stemming: I can use the nltk library's Porter stemmer to perform stemming.)*
+```python
+from nltk.stem import PorterStemmer
+
+stemmer = PorterStemmer()
+
+stemmed_tokens = [stemmer.stem(token) for token in filtered_tokens]
+
+print(stemmed_tokens)
+
+```
+
+- Lemmatization: Use the nltk library's WordNet lemmatizer to perform lemmatization.
+```python
+from nltk.stem import WordNetLemmatizer
+
+lemmatizer = WordNetLemmatizer()
+
+lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
+
+print(lemmatized_tokens)
+
+```
 
 
 
