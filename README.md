@@ -19,6 +19,56 @@ Implement text summarization techniques (e.g., extractive or abstractive summari
 Utilize vectorization techniques like word embeddings (e.g., Word2Vec, GloVe) to convert the preprocessed text data into vector representations.
 Store the vector representations and other relevant metadata (e.g., document ID, title, summary) in the Elasticsearch index.
 
+- Using parsing tools to extract the textual content from the PDF documents
+To extract the textual content from PDF documents, I can use the PyPDF2 library in Python.
+
+- Install the PyPDF2 library:
+```python
+pip install PyPDF2
+```
+
+- Import the necessary modules:
+```python
+import PyPDF2
+```
+
+- Define a function to extract text from a PDF file:
+```python
+def extract_text_from_pdf(file_path):
+    text = ""
+    with open(file_path, "rb") as file:
+        reader = PyPDF2.PdfFileReader(file)
+        total_pages = reader.numPages
+        for page_num in range(total_pages):
+            page = reader.getPage(page_num)
+            text += page.extractText()
+    return text
+```
+
+- Provide the file path to the PDF document you want to extract text from:
+```python
+pdf_file_path = "path_to_your_pdf_file.pdf"
+```
+
+- Call the extract_text_from_pdf function and store the extracted text in a variable:
+```python
+extracted_text = extract_text_from_pdf(pdf_file_path)
+```
+
+- Print the extracted text:
+```python
+print(extracted_text)
+```
+
+Now, if there are multiple PDF documents, we can iterate over them and call the extract_text_from_pdf function for each file to extract their content.
+
+*Reasoning: The PyPDF2 library is a popular choice for extracting text from PDF documents in Python. It provides an easy-to-use interface to extract text page by page. By iterating over the pages, we can extract the textual content and concatenate it to form a complete text representation of the document.*
+
+
+
+
+
+
 **Step 5: Implement Vector Retrieval**
 I implement vector indexing techniques like similarity search using cosine similarity or other relevant algorithms in Elasticsearch.
 Create appropriate queries to retrieve PDF documents based on similarity to a query vector. 
