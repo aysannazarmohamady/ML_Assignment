@@ -333,9 +333,87 @@ class VectorDatabaseServicer(vector_db_pb2_grpc.VectorDatabaseServicer):
 ```
 
 **Step 8: Containerization with Docker-compose**
-I create a Dockerfile to define the environment and dependencies required for running the vector database and GRPC API.
-I write a docker-compose.yml file to configure the entire solution, including the vector database, GRPC API, and any other required services.
-Set up a CI/CD pipeline for the solution to automatically build containers and deploy the application.
-Configure automated testing to validate the functionality and quality of the API.
-Ensure the solution is containerized and can be deployed using Docker-compose or similar tools for continuous integration and deployment.
-Docker-compose for easy deployment and continuous integration. Additionally, GRPC endpoints can be implemented for efficient data uploading and retrieval.
+**8.1. Install Docker and Docker Compose**
+- Install/Open Docker Engine on my machine
+
+8.2. Create a Dockerfile for the API
+In the root directory of your project, create a new file called Dockerfile:
+
+```
+# Use a Python base image
+FROM python:3.9
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the requirements file
+COPY requirements.txt .
+
+# Install the requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire project
+COPY . .
+
+# Expose the port for the API
+EXPOSE 5000
+
+# Set the entry point
+CMD ["python", "app.py"]
+```
+
+
+**8.3. Create a Docker Compose file**
+In the root directory, create a new file called docker-compose.yml:
+
+```yaml
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+volumes:
+  elasticsearch-data:
+```
+
+**This Compose file defines two services:**
+- api: Builds the API container from the current directory using the Dockerfile.
+- elasticsearch: Runs an Elasticsearch container using the official Docker image.
+
+
+**8.4. Update the API code to connect to Elasticsearch**
+In API code, update the Elasticsearch connection settings to point to the Docker container. For using the elasticsearch Python client:
+
+```python
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch(hosts=["http://elasticsearch:9200"])
+```
+
+**8.5. Build and run the containers**
+Open the terminal, navigate to the root directory of the project and then:
+```
+docker-compose up --build
+```
+*This command will build the API container and start both the API and Elasticsearch containers.*
+
+
+**Test the API**
+With the containers running, I should be able to access the API at http://localhost:5000. We can use tools like Postman or curl to send requests to the API endpoints.
+*By following these steps, we have containerized the vector database API using Docker Compose. The API container is built from the provided Dockerfile, and the Elasticsearch container is pulled from the official Docker image. The containers are linked together using the Docker Compose file, allowing the API to communicate with Elasticsearch.*
+
+
+
+
+
