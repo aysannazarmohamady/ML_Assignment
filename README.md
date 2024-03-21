@@ -216,18 +216,55 @@ I perform unit tests on individual components (e.g., PDF parsing, text preproces
 - Container Deployment
 
 
-
-
-
-
-
-
-
-
 **Step 7: GRPC API Development**
 I implement a GRPC API to interact with the vector database.
 And define appropriate API endpoints for uploading PDF documents, searching through documents, and text summarization.
 Ensure proper error handling and input validation within the API.
+
+For GRPC API Development, we need to implement a GRPC API to interact with the vector database. Also need to define appropriate API endpoints for uploading PDF documents, searching through documents, and text summarization. I should ensure proper error handling and input validation within the API.
+**Here is a detailed response for the GRPC API development:**
+
+**1. Define the protobuf file:**
+  
+- Create a file called `vector_database.proto` to define the GRPC service and message types.
+  
+- Define the `Document` message type with fields like `id`, `title`, `content`, and `vector`.
+
+- Define the `UploadDocumentRequest` and `UploadDocumentResponse` message types for uploading documents.
+
+- Define the `SearchRequest` and `SearchResponse` message types for searching through documents.
+
+- Define the `SummarizeRequest` and `SummarizeResponse` message types for text summarization.
+
+- Define the `VectorDatabaseService` with methods for uploading documents, searching, and text summarization.
+
+
+**2. Generate code from the protobuf file:**
+
+- Use the `protoc` compiler to generate the Python code from the `vector_database.proto` file.
+- Run the command to generate the code:
+```python
+protoc -I=. --python_out=. --grpc_python_out=. vector_database.proto
+```
+
+**3. Implement the server-side of the GRPC API:**
+
+- Create a Python file, e.g., `vector_database_server.py`, to implement the server-side of the GRPC API.
+- Import the necessary libraries, including the generated code from the protobuf file.
+- Implement the methods defined in the `VectorDatabaseServicer` class.
+- For the `UploadDocument` method, handle the document uploading, parsing, and vectorization.
+- For the `Search` method, perform the search operation on the vector database based on the provided query.
+- For the `Summarize` method, generate a summary of the provided text.
+- Implement proper error handling and input validation to ensure the API behaves as expected.
+
+
+**4. Implement the client-side of the GRPC API (optional):**
+
+- Create a Python file, e.g., `vector_database_client.py`, to implement the client-side of the GRPC API.
+- Import the necessary libraries, including the generated code from the protobuf file.
+- Create a GRPC channel to connect to the server
+
+
 
 **Step 8: Containerization with Docker-compose**
 I create a Dockerfile to define the environment and dependencies required for running the vector database and GRPC API.
