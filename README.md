@@ -20,9 +20,9 @@ Utilize vectorization techniques like word embeddings (e.g., Word2Vec, GloVe) to
 Store the vector representations and other relevant metadata (e.g., document ID, title, summary) in the Elasticsearch index.
 
 - Using parsing tools to extract the textual content from the PDF documents
-To extract the textual content from PDF documents, I can use the PyPDF2 library in Python.
+To extract the textual content from PDF documents, I can use the `PyPDF2` library in Python.
 
-- Install the PyPDF2 library:
+- Install the `PyPDF2` library:
 ```python
 pip install PyPDF2
 ```
@@ -50,7 +50,7 @@ def extract_text_from_pdf(file_path):
 pdf_file_path = "path_to_your_pdf_file.pdf"
 ```
 
-- Call the extract_text_from_pdf function and store the extracted text in a variable:
+- Call the `extract_text_from_pdf` function and store the extracted text in a variable:
 ```python
 extracted_text = extract_text_from_pdf(pdf_file_path)
 ```
@@ -60,9 +60,9 @@ extracted_text = extract_text_from_pdf(pdf_file_path)
 print(extracted_text)
 ```
 
-Now, if there are multiple PDF documents, we can iterate over them and call the extract_text_from_pdf function for each file to extract their content.
+Now, if there are multiple PDF documents, we can iterate over them and call the `extract_text_from_pdf` function for each file to extract their content.
 
-*Reasoning: The PyPDF2 library is a popular choice for extracting text from PDF documents in Python. It provides an easy-to-use interface to extract text page by page. By iterating over the pages, we can extract the textual content and concatenate it to form a complete text representation of the document.*
+*Reasoning: The `PyPDF2` library is a popular choice for extracting text from PDF documents in Python. It provides an easy-to-use interface to extract text page by page. By iterating over the pages, we can extract the textual content and concatenate it to form a complete text representation of the document.*
 
 **Apply text preprocessing techniques such as tokenization, stop word removal, stemming, and lemmatization to clean the extracted text data.**
 
@@ -331,10 +331,6 @@ class VectorDatabaseServicer(vector_db_pb2_grpc.VectorDatabaseServicer):
         # For example, retrieve relevant documents from the vector database and return them as a response
         response = vector_db_pb2.Search
 ```
-
-
-
-
 
 **Step 8: Containerization with Docker-compose**
 I create a Dockerfile to define the environment and dependencies required for running the vector database and GRPC API.
