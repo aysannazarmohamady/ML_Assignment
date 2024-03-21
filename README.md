@@ -224,7 +224,7 @@ Ensure proper error handling and input validation within the API.
 For GRPC API Development, we need to implement a GRPC API to interact with the vector database. Also need to define appropriate API endpoints for uploading PDF documents, searching through documents, and text summarization. I should ensure proper error handling and input validation within the API.
 **Here is a detailed response for the GRPC API development:**
 
-**1. Define the protobuf file:**
+**7.1. Define the protobuf file:**
   
 - Create a file called `vector_database.proto` to define the GRPC service and message types.
   
@@ -239,7 +239,7 @@ For GRPC API Development, we need to implement a GRPC API to interact with the v
 - Define the `VectorDatabaseService` with methods for uploading documents, searching, and text summarization.
 
 
-**2. Generate code from the protobuf file:**
+**7.2. Generate code from the protobuf file:**
 
 - Use the `protoc` compiler to generate the Python code from the `vector_database.proto` file.
 - Run the command to generate the code:
@@ -247,7 +247,7 @@ For GRPC API Development, we need to implement a GRPC API to interact with the v
 protoc -I=. --python_out=. --grpc_python_out=. vector_database.proto
 ```
 
-**3. Implement the server-side of the GRPC API:**
+**7.3. Implement the server-side of the GRPC API:**
 
 - Create a Python file, e.g., `vector_database_server.py`, to implement the server-side of the GRPC API.
 - Import the necessary libraries, including the generated code from the protobuf file.
@@ -258,11 +258,81 @@ protoc -I=. --python_out=. --grpc_python_out=. vector_database.proto
 - Implement proper error handling and input validation to ensure the API behaves as expected.
 
 
-**4. Implement the client-side of the GRPC API (optional):**
+**7.4. Implement the client-side of the GRPC API (optional):**
 
 - Create a Python file, e.g., `vector_database_client.py`, to implement the client-side of the GRPC API.
 - Import the necessary libraries, including the generated code from the protobuf file.
 - Create a GRPC channel to connect to the server
+
+**To implement a GRPC API to interact with the vector database**
+
+- Define the protobuf file: Create a protobuf file that defines the messages and services for your GRPC API. For example, Create a file named `vector_db.proto`:
+```protobuf
+syntax = "proto3";
+
+package vectordb;
+
+service VectorDatabase {
+  rpc UploadDocument (Document) returns (UploadResponse) {}
+  rpc SearchDocuments (SearchRequest) returns (SearchResponse) {}
+  rpc SummarizeText (TextSummaryRequest) returns (TextSummaryResponse) {}
+}
+
+message Document {
+  string id = 1;
+  string content = 2;
+}
+
+message UploadResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SearchRequest {
+  string query = 1;
+}
+
+message SearchResponse {
+  repeated Document found_documents = 1;
+}
+
+message TextSummaryRequest {
+  string text = 1;
+}
+
+message TextSummaryResponse {
+  string summary = 1;
+}
+```
+
+**Generate code from the protobuf file:** Use the `grpc_tools` package to generate the Python code from the protobuf file. Open terminal and run the command to generate the necessary code:
+```Bash
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. vector_db.proto
+```
+
+**Implement the server:** I Create a Python file, let's say `vector_db_server.py`, and implement the server code using GRPC.
+```Python
+import grpc
+from concurrent import futures
+import vector_db_pb2
+import vector_db_pb2_grpc
+
+class VectorDatabaseServicer(vector_db_pb2_grpc.VectorDatabaseServicer):
+    def UploadDocument(self, request, context):
+        # Implement your logic to handle document upload
+        # For example, you can store the document in the vector database and return a success message
+        response = vector_db_pb2.UploadResponse()
+        response.success = True
+        response.message = "Document uploaded successfully"
+        return response
+
+    def SearchDocuments(self, request, context):
+        # Implement your logic to search documents based on a query
+        # For example, retrieve relevant documents from the vector database and return them as a response
+        response = vector_db_pb2.Search
+```
+
+
 
 
 
