@@ -179,6 +179,10 @@ print(summary)
 
 *In this implementation, I have used NLTK (Natural Language Toolkit) library for text processing tasks such as tokenization, stop word removal, stemming, and frequency distribution calculation. The text summarization technique used here is extractive summarization, where sentences with the highest scores based on word frequencies.*
 
+**Step 5: Implement Vector Retrieval**
+I implement vector indexing techniques like similarity search using cosine similarity or other relevant algorithms in Elasticsearch.
+Create appropriate queries to retrieve PDF documents based on similarity to a query vector. 
+I ensure the vector search process is efficient and scalable by optimizing Elasticsearch settings and indexing strategies.
 
 **To utilize vectorization techniques such as word embeddings and convert the preprocessed text data into vector representations, I follow these steps:**
 
@@ -196,15 +200,29 @@ print(summary)
 
 
 
-
-**Step 5: Implement Vector Retrieval**
-I implement vector indexing techniques like similarity search using cosine similarity or other relevant algorithms in Elasticsearch.
-Create appropriate queries to retrieve PDF documents based on similarity to a query vector. 
-I ensure the vector search process is efficient and scalable by optimizing Elasticsearch settings and indexing strategies.
-
 **Step 6: Test and Validate**
 I develop test cases to validate the functionality and quality of the vector database.
 I perform unit tests on individual components (e.g., PDF parsing, text preprocessing, vectorization) to ensure they work as expected.
+
+**To test and validate the functionality and quality of the vector database, the following steps can be taken:**
+
+- Develop Test Cases
+- Unit Testing
+- GRPC API Development
+- Error Handling and Input Validation
+- Containerization with Docker-compose
+- docker-compose.yml Configuration
+- Automated Testing
+- Container Deployment
+
+
+
+
+
+
+
+
+
 
 **Step 7: GRPC API Development**
 I implement a GRPC API to interact with the vector database.
