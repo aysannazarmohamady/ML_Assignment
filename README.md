@@ -115,6 +115,72 @@ print(lemmatized_tokens)
 
 ```
 
+**To implement text summarization techniques for generating short summaries of documents, you can follow these steps:**
+- Import the necessary libraries:
+```python
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.stem import PorterStemmer
+from nltk.probability import FreqDist
+from heapq import nlargest
+```
+
+- Define a function for text summarization:
+```python
+def generate_summary(text, num_sentences):
+    # Tokenize the text into sentences
+    sentences = sent_tokenize(text)
+    
+    # Tokenize the sentences into words
+    words = word_tokenize(text)
+    
+    # Remove stop words
+    stop_words = set(stopwords.words('english'))
+    words = [word for word in words if word.casefold() not in stop_words]
+    
+    # Stem the words
+    stemmer = PorterStemmer()
+    words = [stemmer.stem(word) for word in words]
+    
+    # Calculate word frequencies
+    word_frequencies = FreqDist(words)
+    
+    # Calculate sentence scores based on word frequencies
+    sentence_scores = {}
+    for sentence in sentences:
+        for word in word_tokenize(sentence.lower()):
+            if word in word_frequencies:
+                if sentence not in sentence_scores:
+                    sentence_scores[sentence] = word_frequencies[word]
+                else:
+                    sentence_scores[sentence] += word_frequencies[word]
+    
+    # Get the top 'num_sentences' sentences with highest scores
+    summary_sentences = nlargest(num_sentences, sentence_scores, key=sentence_scores.get)
+    
+    # Join the summary sentences into a summary paragraph
+    summary = ' '.join(summary_sentences)
+    
+    return summary
+```
+
+- Use the text summarization function on a sample PDF document:
+```python
+# Read the PDF document
+with open('sample.pdf', 'rb') as file:
+    pdf_text = extract_text_from_pdf(file)
+
+# Generate a summary of the document
+num_sentences = 3
+summary = generate_summary(pdf_text, num_sentences)
+print(summary)
+```
+
+*In this implementation, I have used NLTK (Natural Language Toolkit) library for text processing tasks such as tokenization, stop word removal, stemming, and frequency distribution calculation. The text summarization technique used here is extractive summarization, where sentences with the highest scores based on word frequencies.*
+
+
+
 
 
 **Step 5: Implement Vector Retrieval**
