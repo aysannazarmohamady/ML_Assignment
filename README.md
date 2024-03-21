@@ -409,11 +409,6 @@ docker-compose up --build
 *This command will build the API container and start both the API and Elasticsearch containers.*
 
 
-**Test the API**
-With the containers running, I should be able to access the API at http://localhost:5000. We can use tools like Postman or curl to send requests to the API endpoints.
+**8.6. Test the API**
+With the containers running, we should be able to access the API at http://localhost:5000. We can use tools like Postman or curl to send requests to the API endpoints.
 *By following these steps, we have containerized the vector database API using Docker Compose. The API container is built from the provided Dockerfile, and the Elasticsearch container is pulled from the official Docker image. The containers are linked together using the Docker Compose file, allowing the API to communicate with Elasticsearch.*
-
-
-
-
-
