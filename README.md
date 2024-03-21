@@ -180,6 +180,20 @@ print(summary)
 *In this implementation, I have used NLTK (Natural Language Toolkit) library for text processing tasks such as tokenization, stop word removal, stemming, and frequency distribution calculation. The text summarization technique used here is extractive summarization, where sentences with the highest scores based on word frequencies.*
 
 
+**To utilize vectorization techniques such as word embeddings and convert the preprocessed text data into vector representations, I follow these steps:**
+
+**- Choose a word embedding technique:** In this case, I use Word2Vec, a popular word embedding technique that represents words as dense vectors.
+
+**- Preprocess the text data:** Apply text preprocessing techniques such as tokenization, stop word removal, stemming, and lemmatization to clean the extracted text data. This step helps in reducing noise and preparing the text for vector representation.
+
+**- Train the Word2Vec model:** Use the preprocessed text data to train the Word2Vec model. This model learns the vector representations of words based on their context in the text data. The model can be trained using the Gensim library in Python.
+
+**- Convert the preprocessed text data into vector representations:** Iterate through each document in the preprocessed text data. For each document, split it into individual words and obtain their corresponding word embeddings from the trained Word2Vec model. Sum up the word embeddings to obtain a vector representation for the document.
+
+**- Store the vector representations in the vector database:** Store the document vector representations in the vector database for efficient storage and retrieval.
+
+*The preprocessed text data can be effectively converted into vector representations using word embeddings. The Word2Vec technique is chosen due to its ability to capture semantic meaning and context of the textual content.*
+
 
 
 
