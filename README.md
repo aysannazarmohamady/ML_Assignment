@@ -23,7 +23,7 @@ Store the vector representations and other relevant metadata (e.g., document ID,
 To extract the textual content from PDF documents, I can use the `PyPDF2` library in Python.
 
 - Install the `PyPDF2` library:
-```python
+```
 pip install PyPDF2
 ```
 
