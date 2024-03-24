@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environment
+env/
+venv/
+.env
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Data
+data/
+pdf_folder/
+
+# Configuration
+config.*.ini
+
+# macOS
+.DS_Store
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+
+# PyCharm
+.hypothesis/
+.pytest_cache/
+
+# Compiled binaries
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Test files
+tests/
