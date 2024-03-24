@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+service VectorSearchService {
+    rpc SearchDocuments(SearchRequest) returns (SearchResponse) {}
+}
+
+message SearchRequest {
+    string query = 1;
+}
+
+message SearchResponse {
+    repeated Document documents = 1;
+}
+
+message Document {
+    string text = 1;
+    float distance = 2;
+    string summary = 3;
+}
