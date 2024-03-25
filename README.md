@@ -42,7 +42,7 @@ The GRPC API is defined in the `pdf_vector_search.proto` file, which specifies t
 
 ### Instructions
 1. Generate the GRPC Python files by running the following command:
-   `python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/pdf_vector_search.proto`
+   ```python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/pdf_vector_search.proto```
 2. To interact with the GRPC API, you can use a GRPC client library in your preferred programming language or use a tool like `grpc_cli`.
 
 ## Step 8: Containerization
@@ -51,9 +51,9 @@ The project can be containerized using Docker for easy deployment and scaling. T
 
 ### Instructions
 1. Build the Docker image:
-   `docker build -t pdf-vector-search .`
+   ```docker build -t pdf-vector-search .```
 2. Run the Docker container:
-   `docker run -p 50051:50051 pdf-vector-search`
+   ```docker run -p 50051:50051 pdf-vector-search```
 
 ## Step 9: CI/CD Pipeline
 
